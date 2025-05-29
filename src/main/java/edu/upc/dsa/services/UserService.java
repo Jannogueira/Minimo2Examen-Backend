@@ -1,6 +1,7 @@
 package edu.upc.dsa.services;
 
 import edu.upc.dsa.WebManagerImpl;
+import edu.upc.dsa.models.InsigniaDTO;
 import edu.upc.dsa.models.ItemInventarioDTO;
 import edu.upc.dsa.models.UsersScoreDTO;
 import edu.upc.dsa.util.JwtUtil;
@@ -344,6 +345,13 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public List<UsersScoreDTO> getAllUsernamesAndScores() {
         return wm.getAllUsersScoresDTO();
+    }
+
+    @GET
+    @Path("/user/{username}/badges/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<InsigniaDTO> getUserBadges(@PathParam("username") String username) {
+        return WebManagerImpl.getInstance().getUserInsignia(username);
     }
 
 }

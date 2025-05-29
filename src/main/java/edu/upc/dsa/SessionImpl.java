@@ -232,6 +232,7 @@ public class SessionImpl implements Session {
     public List<Object> query(String query, Class theClass, HashMap params) {
         return null;
     }
+
     @Override
     public <T> T getByField(Class<T> theClass, String fieldName, Object value) {
         String sql = QueryHelper.createQuerySELECTbyField(theClass, fieldName);
@@ -286,6 +287,21 @@ public class SessionImpl implements Session {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public <T> List<T> getListByField(Class<T> theClass, String fieldName, Object value) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put(fieldName, value);
+
+        List<Object> results = findAll(theClass, params);
+        List<T> typedResults = new ArrayList<>();
+
+        for (Object obj : results) {
+            if (theClass.isInstance(obj)) {
+                typedResults.add(theClass.cast(obj));
+            }
+        }
+        return typedResults;
     }
 
 }

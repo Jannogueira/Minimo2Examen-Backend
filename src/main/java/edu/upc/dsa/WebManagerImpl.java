@@ -322,4 +322,20 @@ public class WebManagerImpl implements WebManager {
         return result;
     }
 
+    @Override
+    public List<InsigniaDTO> getUserInsignia(String username) {
+        Session session = GameSession.openSession();
+        List<InsigniaDTO> result = new ArrayList<>();
+        try {
+            List<Insignias> insignias = session.getListByField(Insignias.class, "user", username);
+            for (Insignias ins : insignias) {
+                result.add(new InsigniaDTO(ins.getName(), ins.getAvatar()));
+            }
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+
+
 }
