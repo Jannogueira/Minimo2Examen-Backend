@@ -33,4 +33,5 @@ public interface WebManager {
     public String getInventarioPorUsuario(String username);
     public List<UsersScoreDTO> getAllUsersScoresDTO();
     public List<InsigniaDTO> getUserInsignia(String username);
+    public int anadirInsignia(String username, int id);
 }

@@ -354,4 +354,72 @@ public class UserService {
         return WebManagerImpl.getInstance().getUserInsignia(username);
     }
 
+   /* @POST
+    @Path("/insignia")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response anadirInsignia(
+            @HeaderParam("Authorization") String tokenHeader,
+            @FormParam("id") int idInsignia) {
+
+        if (tokenHeader == null || !tokenHeader.startsWith("Bearer ")) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("{\"status\":false, \"message\":\"Token no válido\"}")
+                    .build();
+        }
+
+        String token = tokenHeader.substring("Bearer ".length());
+
+        if (!JwtUtil.validateToken(token)) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity("{\"status\":false, \"message\":\"Token inválido o expirado\"}")
+                    .build();
+        }
+
+        String username = JwtUtil.getUsernameFromToken(token);
+
+        int resultado = wm.anadirInsignia(username, idInsignia);
+
+        if (resultado == 1) {
+            return Response.ok("{\"status\":true, \"message\":\"Insignia añadida correctamente\"}").build();
+        } else if (resultado == 0) {
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("{\"status\":false, \"message\":\"La insignia ya ha sido añadida anteriormente\"}")
+                    .build();
+        } else {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("{\"status\":false, \"message\":\"Error al añadir la insignia\"}")
+                    .build();
+        }
+    }*/
+   @POST
+   @Path("/test/insignia")
+   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response anadirInsigniaTest(
+           @FormParam("username") String username,
+           @FormParam("id") int idInsignia) {
+
+       if (username == null || username.isEmpty()) {
+           return Response.status(Response.Status.BAD_REQUEST)
+                   .entity("{\"status\":false, \"message\":\"Username no proporcionado\"}")
+                   .build();
+       }
+
+       int resultado = wm.anadirInsignia(username, idInsignia);
+
+       if (resultado == 1) {
+           return Response.ok("{\"status\":true, \"message\":\"Insignia añadida correctamente\"}").build();
+       } else if (resultado == 0) {
+           return Response.status(Response.Status.CONFLICT)
+                   .entity("{\"status\":false, \"message\":\"La insignia ya ha sido añadida anteriormente\"}")
+                   .build();
+       } else {
+           return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                   .entity("{\"status\":false, \"message\":\"Error al añadir la insignia\"}")
+                   .build();
+       }
+   }
+
+
 }

@@ -1,30 +1,18 @@
 package edu.upc.dsa.models;
 
 public class Insignias {
-    int id;
-    String user;
-    String name;
-    String avatar;
+    String User;
+    int Id_Insignia;
 
-    public Insignias() {
+    public Insignias(String user, int id_Insignia) {
+        User = user;
+        Id_Insignia = id_Insignia;
     }
-    public Insignias(String user, String name, String avatar) {
-        this.user = user;
-        this.name = name;
-        this.avatar = avatar;
-    }
-    public Insignias(int id, String user, String name, String avatar) {
-        this.id = id;
-        this.user = user;
-        this.name = name;
-        this.avatar = avatar;
-    }
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
-    public String getUser() {return user;}
-    public void setUser(String user) {this.user = user;}
-    public String getName() {return name;}
-    public void setName(String name) {this.name = name;}
-    public String getAvatar() {return avatar;}
-    public void setAvatar(String avatar) {this.avatar = avatar;}
+
+    public Insignias(){}
+
+    public String getUser() {return User;}
+    public void setUser(String user) {User = user;}
+    public int getId_Insignia() {return Id_Insignia;}
+    public void setId_Insignia(int id_Insignia) {Id_Insignia = id_Insignia;}
 }
